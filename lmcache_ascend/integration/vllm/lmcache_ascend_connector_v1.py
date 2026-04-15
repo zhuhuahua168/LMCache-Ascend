@@ -25,3 +25,23 @@ logger = init_logger(__name__)
 class LMCacheAscendConnectorV1Dynamic(LMCacheConnectorV1Dynamic):
     def __init__(self, vllm_config: "VllmConfig", role: KVConnectorRole) -> None:
         super().__init__(vllm_config=vllm_config, role=role)
+
+    def save_kv_layer(self, layer_name, kv_cache_layer, attn_metadata):
+        if self._lmcache_engine is None:
+            logger.debug(
+                "save_kv_layer called but lmcache_engine is not initialized yet, "
+                "skipping (likely during warm-up). layer_name=%s",
+                layer_name,
+            )
+            return
+        self._lmcache_engine.save_kv_layer(layer_name, kv_cache_layer, attn_metadata)
+
+    def load_kv_layer(self, layer_name, kv_cache_layer, attn_metadata):
+        if self._lmcache_engine is None:
+            logger.debug(
+                "load_kv_layer called but lmcache_engine is not initialized yet, "
+                "skipping (likely during warm-up). layer_name=%s",
+                layer_name,
+            )
+            return
+        self._lmcache_engine.load_kv_layer(layer_name, kv_cache_layer, attn_metadata)
