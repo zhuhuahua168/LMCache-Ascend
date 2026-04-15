@@ -1,4 +1,4 @@
 [submodule "third_party/kvcache-ops"]
 	path = third_party/kvcache-ops
-	url = https://atomgit.com/openeuler/kvcache-ops.git
+	url = https://gitcode.com/openeuler/kvcache-ops.git
 
