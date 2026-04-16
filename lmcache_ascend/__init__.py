@@ -4,6 +4,8 @@ from lmcache_ascend import _build_info
 
 # NOTE: Must be manually edited per each version and
 # is also used by the test infrastructure.
+from lmcache_ascend._version import __version__
+version = __version__
 LMCACHE_UPSTREAM_TAG = "v0.4.2"
 LMCACHE_ASCEND_PATCHED = False
 
